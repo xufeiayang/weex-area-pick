@@ -58,8 +58,8 @@ npm i weex-area-pick
 ## 使用方法
 
 | Value           |type                                                     
-| -------         | ---                                     
-| showAreaPicker  |布尔值                                                             |
-| defaultAddr     |{province: '北京',city: '北京',dist: '东城区'}                       |
+| -------         | ---                                    
+| showAreaPicker  |布尔值
+| defaultAddr     |{province: '北京',city: '北京',dist: '东城区'}
 | closeAreaPicker |方法
 
