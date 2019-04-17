@@ -1,0 +1,22 @@
+{
+  "name": "weex-area-pick",
+  "version": "1.0.0",
+  "description": "weex area pick",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xufeiayang/weex-area-pick.git"
+  },
+  "keywords": [
+    "weex-area-pick"
+  ],
+  "author": "xufeiayang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xufeiayang/weex-area-pick/issues"
+  },
+  "homepage": "https://github.com/xufeiayang/weex-area-pick#readme"
+}
