@@ -6,7 +6,7 @@
              :height="700">
     <div class="title">
       <text class="title-text">选择省市区</text>
-      <image  @click="wxcOverlayBodyClicked" :style="setWH(24, 24)" src="../src/assets/images/close.png"></image>
+      <div @click="wxcOverlayBodyClicked" class="button"><text class="but-text">确定</text></div>
     </div>
     <div class="select-item">
       <list class="list-item">
@@ -29,11 +29,11 @@
 </template>
 
 <script>
-  import { WxcPopup, WxcOverlay } from 'weex-ui';
-  import area from '@/assets/js/area';
+  import WxcPopup from './wxc-popup';
+  import area from './area';
   const dom = weex.requireModule('dom') || {};
   export default {
-    components: { WxcPopup, WxcOverlay },
+    components: { WxcPopup },
     name: 'area-pick',
     data () {
       return {
@@ -152,5 +152,17 @@
   .no-active {
     font-size: 32px;
     color: #666;
+  }
+  .button {
+    background-color: #ff8400;
+    height: 80px;
+    width: 200px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  .but-text {
+    color: #fff;
+    font-size: 32px;
   }
 </style>

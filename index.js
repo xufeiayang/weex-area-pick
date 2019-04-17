@@ -1,3 +1,3 @@
 import WeexAreaPick from './index.vue';
 
-export { WeexAreaPick }
+export default WeexAreaPick
