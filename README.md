@@ -11,7 +11,7 @@ npm i weex-area-pick
 ```
 ## 示例图
 
-![Image text](./image/example.png)
+![Image text](https://github.com/xufeiayang/weex-area-pick/blob/master/image/example.jpg)
 ## 使用方法
 
 ``` js
