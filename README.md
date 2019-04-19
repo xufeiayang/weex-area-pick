@@ -54,7 +54,7 @@ npm i weex-area-pick
 
 <style scoped>
 </style>
-
+```
 ## 属性值
 
 |   |   |   |
