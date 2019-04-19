@@ -55,11 +55,11 @@ npm i weex-area-pick
 <style scoped>
 </style>
 
-## 使用方法
+## 属性值
 
-| Value           |type                                                     
-| -------         | ---                                    
-| showAreaPicker  |布尔值
-| defaultAddr     |{province: '北京',city: '北京',dist: '东城区'}
-| closeAreaPicker |方法
-
+|   |   |   |
+| :------------: | :------------: | :------------: |
+|  type | value  |  desc |
+| showAreaPicker  | 布尔值  | 是否显示  |
+|  defaultAddr |  {province: '北京',city: '北京',dist: '东城区'} | 默认地址  |
+|  closeAreaPicker |  方法 |  回调函数，返回选择省市区格式 {province: '北京',city: '北京',dist: '东城区'} |
