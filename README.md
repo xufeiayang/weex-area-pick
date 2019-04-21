@@ -20,9 +20,10 @@ npm i weex-area-pick
     <text @click="openPicker">打开</text>
 
      <weex-area-pick v-if="showAreaPicker"
-                   :show="showAreaPicker"
-                   :defaultAddr="defaultAddr"
-                   @closeAreaPicker='close'>
+                     theme-color="#ff8400"
+                     :show="showAreaPicker"
+                     :defaultAddr="defaultAddr"
+                     @closeAreaPicker='close'>
      </weex-area-pick>
   </div>
 </template>
@@ -34,12 +35,12 @@ npm i weex-area-pick
   export default {
     components: { weex-area-pick },
     data: () => ({
-      defaultAddr: {
-                     province: '北京',
-                     city: '北京',
-                     dist: '东城区'
-                  }, // 可选
-      showAreaPicker: false,
+      defaultAddr:  {
+        province: '北京',
+        city: '北京',
+        dist: '东城区'
+      }, // 可选
+      showAreaPicker: false, // 默认不显示
     }),
     methods: {
       openPicker () {
@@ -63,3 +64,4 @@ npm i weex-area-pick
 | showAreaPicker  | 布尔值  | 是否显示  |
 |  defaultAddr |  {province: '北京',city: '北京',dist: '东城区'} | 默认地址  |
 |  closeAreaPicker |  方法 |  回调函数，返回选择省市区格式 {province: '北京',city: '北京',dist: '东城区'} |
+|  themeColor | 色值  |  主题颜色，选中的省市区颜色和按钮颜色，可选 |

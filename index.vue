@@ -6,22 +6,22 @@
              :height="700">
     <div class="title">
       <text class="title-text">选择省市区</text>
-      <div @click="wxcOverlayBodyClicked" class="button"><text class="but-text">确定</text></div>
+      <div @click="wxcOverlayBodyClicked" :style="{'background-color': themeColor || '#ff8400'}" class="button"><text class="but-text">确定</text></div>
     </div>
     <div class="select-item">
       <list class="list-item">
         <cell v-for="(item, index) in areaData" :key="item.title" append="tree" :ref="'province'+index" @click="selectProvince(index)">
-          <text class="city-item" :class="[index === selectIndex ? 'active' : 'no-active']">{{item.title}}</text>
+          <text class="city-item" :style="index === selectIndex ? textActiveStyle : textStyle">{{item.title}}</text>
         </cell>
       </list>
       <list class="list-item">
         <cell v-for="(item ,index) in areaData[selectIndex].children" :key="item.title" :ref="'city'+index" append="tree" @click="selectCity(index)">
-          <text class="city-item" :class="[index === selectCityIndex ? 'active' : 'no-active']">{{item.title}}</text>
+          <text class="city-item" :style="index === selectCityIndex ? textActiveStyle : textStyle">{{item.title}}</text>
         </cell>
       </list>
       <list class="list-item">
         <cell v-for="(item, index) in areaData[selectIndex].children[selectCityIndex].children" :ref="'dist'+index" :key="item.title" append="tree" @click="selectDist(index)">
-          <text class="city-item" :class="[index === selectdisIndex ? 'active' : 'no-active']">{{item.title}}</text>
+          <text class="city-item" :style="index === selectDisIndex ? textActiveStyle : textStyle">{{item.title}}</text>
         </cell>
       </list>
     </div>
@@ -29,26 +29,34 @@
 </template>
 
 <script>
-  import WxcPopup from './wxc-popup';
-  import area from './area';
+  import { WxcPopup, WxcOverlay } from 'weex-ui';
+  import area from '@/assets/js/area';
   const dom = weex.requireModule('dom') || {};
   export default {
-    components: { WxcPopup },
-    name: 'area-pick',
+    components: { WxcPopup, WxcOverlay },
     data () {
       return {
-        areaData: area,
-        selectIndex: 0,
-        selectCityIndex: 0,
-        selectdisIndex: 0,
+        areaData: area, // 省市区数据
+        selectIndex: 0, // 省份索引
+        selectCityIndex: 0, // 市索引
+        selectDisIndex: 0, // 区索引
         curArea: {
           province: '北京',
           city: '北京',
           dist: '东城区'
-        }
+        },
+        textActiveStyle: {
+          'color': this.themeColor || '#ff8400',
+          'font-size': '40px'
+        },
+        textStyle: {
+          'color': '#666',
+          'font-size': '32px'
+        },
+        clicked: false
       };
     },
-    props: ['show', 'defaultAddr'],
+    props: ['show', 'defaultAddr', 'themeColor'],
     methods: {
       selectProvince (index) {
         this.selectIndex = index;
@@ -57,13 +65,20 @@
         this.selectCityIndex = index;
       },
       selectDist (index) {
-        this.selectdisIndex = index;
+        this.selectDisIndex = index;
       },
+      /*
+       * @desc 关闭选择器，传回选择的值
+       * @param
+       * @return
+       * @author xufeiyang
+       * @time 2019/4/21
+      */
       wxcOverlayBodyClicked () {
         this.curArea = {
           province: this.areaData[this.selectIndex].title,
           city: this.areaData[this.selectIndex].children[this.selectCityIndex].title,
-          dist: this.areaData[this.selectIndex].children[this.selectCityIndex].children[this.selectdisIndex].title
+          dist: this.areaData[this.selectIndex].children[this.selectCityIndex].children[this.selectDisIndex].title
         };
         this.$emit('closeAreaPicker', this.curArea);
       },
@@ -81,6 +96,7 @@
       }
     },
     created () {
+      // 控制滚动条滚动到默认地址
       if (this.defaultAddr) {
         this.curArea = this.defaultAddr;
         if (this.curArea.province) {
@@ -94,14 +110,14 @@
           });
         }
         if (this.curArea.dist) {
-          this.selectdisIndex = this.areaData[this.selectIndex].children[this.selectdisIndex].children.findIndex((value, index, arr) => {
+          this.selectDisIndex = this.areaData[this.selectIndex].children[this.selectDisIndex].children.findIndex((value, index, arr) => {
             return value.title === this.curArea.dist;
           });
         }
         setTimeout(() => {
           this.scrollerCell(`province${this.selectIndex}`);
           this.scrollerCell(`city${this.selectCityIndex}`);
-          this.scrollerCell(`dist${this.selectdisIndex}`);
+          this.scrollerCell(`dist${this.selectDisIndex}`);
         }, 800);
       }
     }
@@ -145,16 +161,7 @@
     font-size: 32px;
     color: #333;
   }
-  .active {
-    font-size: 40px;
-    color: #ff8400;
-  }
-  .no-active {
-    font-size: 32px;
-    color: #666;
-  }
   .button {
-    background-color: #ff8400;
     height: 80px;
     width: 200px;
     border-radius: 10px;
